@@ -258,3 +258,35 @@ let nonWorkingDayNums = empDailyHrsAndWageArr
     .map(dailyHrsAndWage => dailyHrsAndWage.dayNum);
 
 console.log("UC-11D Non-Working Day Numbers: ", nonWorkingDayNums);
+
+//UC-11 : Create Employee Payroll Data with id, name, and salary
+class EmployeePayrollData {
+    // Constructor
+    constructor(id, name, salary) {
+        this.id = id;
+        this.name = name;
+        this.salary = salary;
+    }
+
+    // Getter and Setter for name
+    get name() {
+        return this._name;
+    }
+
+    set name(name) {
+        this._name = name;
+    }
+
+    // toString() method
+    toString() {
+        return `id=${this.id}, name='${this.name}', salary=${this.salary}`;
+    }
+}
+
+// Creating an instance
+let employeePayrollData = new EmployeePayrollData(1, "Mark", 30000);
+console.log( "UC-11 : "+ employeePayrollData.toString());
+
+// Updating the name
+employeePayrollData.name = "John";
+console.log("UC-11 : "+ employeePayrollData.toString());
