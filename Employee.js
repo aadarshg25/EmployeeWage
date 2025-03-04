@@ -1,3 +1,4 @@
+// UC-1: Check Employee Presence
 const IS_ABSENT = 0;
 // Generate a random number (0 or 1)
 let empCheck = Math.floor(Math.random() * 10) % 2;
@@ -8,7 +9,7 @@ if (empCheck === IS_ABSENT) {
     console.log("Employee is PRESENT");
 }
 
-//Calculate Daily Employee Wage based on Work Type
+// UC-2: Calculate Daily Employee Wage based on Work Type
 const IS_PART_TIME = 1;
 const IS_FULL_TIME = 2;
 const PART_TIME_HOURS = 4;
@@ -33,3 +34,27 @@ switch (empCheck2) {
 
 let empWage = empHrs * WAGE_PER_HOUR;
 console.log("Employee Wage: $" + empWage);
+
+// UC-3: Refactor Code to Use Function for Daily Working Hours
+function getWorkingHours(empCheck) {
+    switch (empCheck) {
+        case IS_PART_TIME:
+            return PART_TIME_HOURS;
+        case IS_FULL_TIME:
+            return FULL_TIME_HOURS;
+        default:
+            return 0;
+    }
+}
+
+// Generate random number (0, 1, or 2) for employee attendance
+let empCheck3 = Math.floor(Math.random() * 10) % 3;
+
+// Get employee working hours using function
+let empHrs3 = getWorkingHours(empCheck3);
+
+// Calculate Employee Wage using refactored function
+let empWage3 = empHrs3 * WAGE_PER_HOUR;
+
+// Print Employee Wage
+console.log("Refactored Employee Wage (UC-3): $" + empWage3);
