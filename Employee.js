@@ -58,3 +58,20 @@ let empWage3 = empHrs3 * WAGE_PER_HOUR;
 
 // Print Employee Wage
 console.log("Refactored Employee Wage (UC-3): $" + empWage3);
+
+// UC-4: Calculate Wages for a Month (Assuming 20 Working Days)
+const NUM_OF_WORKING_DAYS = 20;
+let totalEmpHrs = 0;
+
+// Loop through 20 working days
+for (let day = 0; day < NUM_OF_WORKING_DAYS; day++) {
+    let empCheck = Math.floor(Math.random() * 10) % 3;
+    totalEmpHrs += getWorkingHours(empCheck);
+}
+
+// Calculate Monthly Wage
+let totalEmpWage = totalEmpHrs * WAGE_PER_HOUR;
+
+// Print Total Hours and Monthly Wage
+console.log("Total Hours Worked: " + totalEmpHrs);
+console.log("Total Monthly Wage: $" + totalEmpWage);
