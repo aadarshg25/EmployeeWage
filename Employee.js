@@ -259,15 +259,15 @@ let nonWorkingDayNums = empDailyHrsAndWageArr
 
 console.log("UC-11D Non-Working Day Numbers: ", nonWorkingDayNums);
 
-// UC-11 : Create Employee Payroll Data with id, name, salary, gender, and start date
+// UC-11 & UC-14: Extend Employee Payroll Data with Validations
 class EmployeePayrollData {
-    // Constructor
+    // Constructor with validations
     constructor(id, name, salary, gender, startDate) {
-        this.id = id;
+        this.id = this.validateId(id);
         this.name = name;
-        this.salary = salary;
-        this.gender = gender;
-        this.startDate = startDate;
+        this.salary = this.validateSalary(salary);
+        this.gender = this.validateGender(gender);
+        this.startDate = this.validateStartDate(startDate);
     }
 
     // Getter and Setter for name with validation
@@ -283,6 +283,32 @@ class EmployeePayrollData {
             throw new Error("Name is Incorrect!!");
     }
 
+    // Validate ID
+    validateId(id) {
+        if (id > 0) return id;
+        else throw new Error("ID must be a positive non-zero number");
+    }
+
+    // Validate Salary
+    validateSalary(salary) {
+        if (salary > 0) return salary;
+        else throw new Error("Salary must be a positive non-zero number");
+    }
+
+    // Validate Gender
+    validateGender(gender) {
+        let genderRegex = /^[MF]$/;
+        if (genderRegex.test(gender)) return gender;
+        else throw new Error("Gender must be 'M' or 'F'");
+    }
+
+    // Validate Start Date
+    validateStartDate(startDate) {
+        let today = new Date();
+        if (startDate <= today) return startDate;
+        else throw new Error("Start Date cannot be in the future");
+    }
+
     // toString() method
     toString() {
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -291,22 +317,37 @@ class EmployeePayrollData {
     }
 }
 
-// Creating an instance
-let employeePayrollData = new EmployeePayrollData(1, "Mark", 30000, "M", new Date());
-console.log("UC-11 : " + employeePayrollData.toString());
-
-// Updating the name with try-catch for error handling
+// Creating an instance with try-catch for error handling
+let employeePayrollData;
 try {
-    employeePayrollData.name = "John";
-    console.log("UC-11 : " + employeePayrollData.toString());
+    employeePayrollData = new EmployeePayrollData(1, "Mark", 30000, "M", new Date());
+    console.log("UC-14 : " + employeePayrollData.toString());
 } catch (e) {
-    console.error(e);
+    console.error("UC-14 Error: " + e.message);
+}
+
+// Attempting to update name with try-catch for validation
+try {
+    if (employeePayrollData) {
+        employeePayrollData.name = "John";
+        console.log("UC-14 : " + employeePayrollData.toString());
+    }
+} catch (e) {
+    console.error("UC-14 Error: " + e.message);
 }
 
 // Creating another instance with valid data
 try {
     let newEmployeePayrollData = new EmployeePayrollData(2, "Terrisa", 30000, "F", new Date());
-    console.log("UC-11 : " + newEmployeePayrollData.toString());
+    console.log("UC-14 : " + newEmployeePayrollData.toString());
 } catch (e) {
-    console.error(e);
+    console.error("UC-14 Error: " + e.message);
+}
+
+// Testing invalid cases
+try {
+    let invalidEmployee = new EmployeePayrollData(-1, "Alex", -5000, "X", new Date("2030-01-01"));
+    console.log("UC-14 : " + invalidEmployee.toString());
+} catch (e) {
+    console.error("UC-14 Error: " + e.message);
 }
