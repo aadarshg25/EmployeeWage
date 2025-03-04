@@ -270,13 +270,17 @@ class EmployeePayrollData {
         this.startDate = startDate;
     }
 
-    // Getter and Setter for name
+    // Getter and Setter for name with validation
     get name() {
         return this._name;
     }
 
     set name(name) {
-        this._name = name;
+        let nameRegex = new RegExp('^[A-Z][a-zA-Z]{2,}$');
+        if (nameRegex.test(name))
+            this._name = name;
+        else
+            throw new Error("Name is Incorrect!!");
     }
 
     // toString() method
@@ -291,6 +295,18 @@ class EmployeePayrollData {
 let employeePayrollData = new EmployeePayrollData(1, "Mark", 30000, "M", new Date());
 console.log("UC-11 : " + employeePayrollData.toString());
 
-// Updating the name
-employeePayrollData.name = "John";
-console.log("UC-11 : " + employeePayrollData.toString());
+// Updating the name with try-catch for error handling
+try {
+    employeePayrollData.name = "John";
+    console.log("UC-11 : " + employeePayrollData.toString());
+} catch (e) {
+    console.error(e);
+}
+
+// Creating another instance with valid data
+try {
+    let newEmployeePayrollData = new EmployeePayrollData(2, "Terrisa", 30000, "F", new Date());
+    console.log("UC-11 : " + newEmployeePayrollData.toString());
+} catch (e) {
+    console.error(e);
+}
