@@ -71,7 +71,6 @@ const MAX_WORKING_DAYS = 20;
 let totalWorkingDays = 0;
 let totalHoursWorked = 0;
 
-// Loop until max hours or max days is reached
 while (totalHoursWorked < MAX_HRS_IN_MONTH && totalWorkingDays < MAX_WORKING_DAYS) {
     totalWorkingDays++;
     let empCheck = Math.floor(Math.random() * 10) % 3;
@@ -85,3 +84,30 @@ let finalEmpWage = totalHoursWorked * WAGE_PER_HOUR;
 console.log("UC-5 - Total Days Worked: " + totalWorkingDays);
 console.log("UC-5 - Total Hours Worked: " + totalHoursWorked);
 console.log("UC-5 - Total Employee Wage: $" + finalEmpWage);
+
+// UC-6: Store the Daily Wage along with the Total Wage in an Array
+function calcDailyWage(empHrs) {
+    return empHrs * WAGE_PER_HOUR;
+}
+
+let empDailyWageArr = []; // Array to store daily wages
+
+totalWorkingDays = 0;
+totalHoursWorked = 0;
+
+while (totalHoursWorked < MAX_HRS_IN_MONTH && totalWorkingDays < MAX_WORKING_DAYS) {
+    totalWorkingDays++;
+    let empCheck = Math.floor(Math.random() * 10) % 3;
+    let empHrs = getWorkingHours(empCheck);
+    totalHoursWorked += empHrs;
+
+    // Store daily wage in array
+    empDailyWageArr.push(calcDailyWage(empHrs));
+}
+
+// Calculate total employee wage using array
+let totalWageFromArray = empDailyWageArr.reduce((total, wage) => total + wage, 0);
+
+// Print daily wages and total wage
+console.log("UC-6 - Daily Wages: ", empDailyWageArr);
+console.log("UC-6 - Total Employee Wage from Array: $" + totalWageFromArray);
