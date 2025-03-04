@@ -111,3 +111,52 @@ let totalWageFromArray = empDailyWageArr.reduce((total, wage) => total + wage, 0
 // Print daily wages and total wage
 console.log("UC-6 - Daily Wages: ", empDailyWageArr);
 console.log("UC-6 - Total Employee Wage from Array: $" + totalWageFromArray);
+
+// UC-7A: Calculate Total Wage using forEach & reduce method
+let totalEmpWage2 = 0;
+
+empDailyWageArr.forEach((dailyWage) => (totalEmpWage2 += dailyWage));
+
+console.log("UC-7A Total Employee Wage (forEach): $" + totalEmpWage2);
+
+let totalWageUsingReduce = empDailyWageArr.reduce((total, wage) => total + wage, 0);
+
+console.log("UC-7A Total Employee Wage (reduce): $" + totalWageUsingReduce);
+
+// UC-7B: Show the Day along with Daily Wage using map function
+let dailyCounter = 0;
+let mapDayWithWageArr = empDailyWageArr.map((dailyWage) => {
+    dailyCounter++;
+    return `Day ${dailyCounter} => $${dailyWage}`;
+});
+
+console.log("UC-7B Daily Wage Map: ", mapDayWithWageArr);
+
+// UC-7C: Show Days when Full Time Wage of 160 was earned (using filter)
+const FULL_TIME_WAGE = 160;
+let fullDayWageArr = mapDayWithWageArr.filter((dayWage) => dayWage.includes(FULL_TIME_WAGE));
+
+console.log("UC-7C Days with Full Time Wage Earned: ", fullDayWageArr);
+
+// UC-7D: Find the first occurrence of Full Time Wage (using find)
+let firstFullTimeWageDay = mapDayWithWageArr.find((dayWage) => dayWage.includes(FULL_TIME_WAGE));
+
+console.log("UC-7D First Full Time Wage Earned on: ", firstFullTimeWageDay);
+
+// UC-7E: Check if Every Element in Full Day Wage Array is Truly Full Time Wage (using every)
+let isAllFullTimeWage = fullDayWageArr.every((dayWage) => dayWage.includes(FULL_TIME_WAGE));
+
+console.log("UC-7E Check if All Days in Full Wage Array are Full Time Wage: ", isAllFullTimeWage);
+
+// UC-7F: Check if There is Any Part Time Wage (using some)
+const PART_TIME_WAGE = 80;
+let hasPartTimeWage = mapDayWithWageArr.some((dayWage) => dayWage.includes(PART_TIME_WAGE));
+
+console.log("UC-7F Check If Any Part Time Wage Exists: ", hasPartTimeWage);
+
+// UC-7G: Find the Number of Days the Employee Worked (using reduce)
+let totalDaysWorked = empDailyWageArr.reduce((numOfDays, dailyWage) => {
+    return dailyWage > 0 ? numOfDays + 1 : numOfDays;
+}, 0);
+
+console.log("UC-7G Number of Days Employee Worked: ", totalDaysWorked);
