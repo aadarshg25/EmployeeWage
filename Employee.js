@@ -259,13 +259,15 @@ let nonWorkingDayNums = empDailyHrsAndWageArr
 
 console.log("UC-11D Non-Working Day Numbers: ", nonWorkingDayNums);
 
-//UC-11 : Create Employee Payroll Data with id, name, and salary
+// UC-11 : Create Employee Payroll Data with id, name, salary, gender, and start date
 class EmployeePayrollData {
     // Constructor
-    constructor(id, name, salary) {
+    constructor(id, name, salary, gender, startDate) {
         this.id = id;
         this.name = name;
         this.salary = salary;
+        this.gender = gender;
+        this.startDate = startDate;
     }
 
     // Getter and Setter for name
@@ -279,14 +281,16 @@ class EmployeePayrollData {
 
     // toString() method
     toString() {
-        return `id=${this.id}, name='${this.name}', salary=${this.salary}`;
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const empDate = this.startDate ? this.startDate.toLocaleDateString("en-US", options) : "undefined";
+        return `id=${this.id}, name='${this.name}', salary=${this.salary}, gender=${this.gender}, startDate=${empDate}`;
     }
 }
 
 // Creating an instance
-let employeePayrollData = new EmployeePayrollData(1, "Mark", 30000);
-console.log( "UC-11 : "+ employeePayrollData.toString());
+let employeePayrollData = new EmployeePayrollData(1, "Mark", 30000, "M", new Date());
+console.log("UC-11 : " + employeePayrollData.toString());
 
 // Updating the name
 employeePayrollData.name = "John";
-console.log("UC-11 : "+ employeePayrollData.toString());
+console.log("UC-11 : " + employeePayrollData.toString());
