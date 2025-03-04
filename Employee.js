@@ -160,3 +160,26 @@ let totalDaysWorked = empDailyWageArr.reduce((numOfDays, dailyWage) => {
 }, 0);
 
 console.log("UC-7G Number of Days Employee Worked: ", totalDaysWorked);
+
+// UC-8: Store Daily Wages in a Map
+let empDailyWageMap = new Map();
+
+totalWorkingDays = 0;
+totalHoursWorked = 0;
+
+while (totalHoursWorked < MAX_HRS_IN_MONTH && totalWorkingDays < MAX_WORKING_DAYS) {
+    totalWorkingDays++;
+    let empCheck = Math.floor(Math.random() * 10) % 3;
+    let empHrs = getWorkingHours(empCheck);
+    totalHoursWorked += empHrs;
+
+    // Store daily wage in the Map with day as key
+    empDailyWageMap.set(totalWorkingDays, calcDailyWage(empHrs));
+}
+
+// Compute total wage using the Map
+let totalWageFromMap = Array.from(empDailyWageMap.values()).reduce((total, wage) => total + wage, 0);
+
+// Print daily wages from Map and total wage
+console.log("UC-8 - Daily Wages in Map: ", empDailyWageMap);
+console.log("UC-8 - Total Employee Wage from Map: $" + totalWageFromMap);
